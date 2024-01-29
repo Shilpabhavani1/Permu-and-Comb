@@ -1,0 +1,30 @@
+class Solution {
+public:
+    void fun(vector<int>&ds,vector<int>&nums,vector<vector<int>>&res,vector<int>&temp)
+    {
+        if(temp.size()==nums.size())
+        {
+            res.push_back(temp);
+            return;
+        }
+        for(int i=0;i<nums.size();i++)
+        {
+            if(ds[i]==0) 
+            {
+                ds[i]=1;
+                temp.push_back(nums[i]);
+                fun(ds,nums,res,temp);
+                temp.pop_back();
+                ds[i]=0;
+            }
+        }
+    }
+    vector<vector<int>> permute(vector<int>& nums) {
+        int n=nums.size();
+        vector<vector<int>>res;
+        vector<int>ds(n,0);
+        vector<int>temp;
+        fun(ds,nums,res,temp);
+        return res;
+    }
+};
